@@ -26,6 +26,7 @@ export const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   const { getTotalItemsCount } = useCartStore();
   const { items: wishlistItems } = useWishlistStore();
@@ -36,6 +37,7 @@ export const Navbar: React.FC = () => {
   const wishlistCount = wishlistItems.length;
 
   useEffect(() => {
+    setMounted(true);
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
@@ -115,7 +117,7 @@ export const Navbar: React.FC = () => {
               aria-label="View Wishlist"
             >
               <Heart className="w-5 h-5" />
-              {wishlistCount > 0 && (
+              {mounted && wishlistCount > 0 && (
                 <span className="absolute top-1 right-1 w-4 h-4 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center animate-scale">
                   {wishlistCount}
                 </span>
@@ -129,7 +131,7 @@ export const Navbar: React.FC = () => {
               aria-label="Open Shopping Cart"
             >
               <ShoppingBag className="w-5 h-5 text-charcoal" />
-              {cartCount > 0 && (
+              {mounted && cartCount > 0 && (
                 <span className="absolute -top-1 -right-1 min-w-[20px] h-5 bg-amber-500 text-charcoal-dark font-black text-[11px] px-1.5 rounded-full flex items-center justify-center shadow-sm">
                   {cartCount}
                 </span>
@@ -138,7 +140,7 @@ export const Navbar: React.FC = () => {
 
             {/* User Profile / Auth Dropdown */}
             <div className="relative">
-              {isAuthenticated ? (
+              {mounted && isAuthenticated ? (
                 <div className="relative">
                   <button
                     onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}

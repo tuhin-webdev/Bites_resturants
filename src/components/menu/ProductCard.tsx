@@ -16,13 +16,18 @@ interface ProductCardProps {
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product, highlightStyle = false }) => {
+  const [mounted, setMounted] = React.useState(false);
   const { items, addItem, updateQuantity } = useCartStore();
   const { isInWishlist, toggleWishlist } = useWishlistStore();
   const { setQuickViewProduct, addToast } = useUIStore();
 
-  const isFavorited = isInWishlist(product.id);
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isFavorited = mounted ? isInWishlist(product.id) : false;
   const cartItem = items.find((item) => item.productId === product.id);
-  const inCartQty = cartItem ? cartItem.quantity : 0;
+  const inCartQty = mounted && cartItem ? cartItem.quantity : 0;
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
