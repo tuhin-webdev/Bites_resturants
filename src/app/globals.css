@@ -84,3 +84,10 @@
     display: block !important;
   }
 }
+
+/* Hide Next.js development indicator popup overlay */
+nextjs-portal,
+[data-nextjs-toast],
+[data-nextjs-dev-overlay-portal] {
+  display: none !important;
+}
