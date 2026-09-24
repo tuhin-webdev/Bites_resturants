@@ -45,6 +45,10 @@ export const Navbar: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  if (pathname.startsWith("/admin") || pathname.startsWith("/pos")) {
+    return null;
+  }
+
   const navLinks = [
     { label: "Home", href: "/" },
     { label: "Menu", href: "/menu" },
@@ -96,6 +100,13 @@ export const Navbar: React.FC = () => {
                 </Link>
               );
             })}
+            <Link
+              href="/admin"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-orange-500/10 text-orange-600 text-xs font-bold hover:bg-[#FF6B00] hover:text-white transition-all shadow-xs"
+            >
+              <span className="w-2 h-2 rounded-full bg-[#FF6B00] animate-pulse" />
+              FoodDesk POS
+            </Link>
           </nav>
 
           {/* Right Action Icons & Buttons */}

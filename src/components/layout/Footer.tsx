@@ -2,13 +2,19 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { UtensilsCrossed, ArrowRight, CheckCircle2, ShieldCheck } from "lucide-react";
 import { useUIStore } from "@/store/uiStore";
 
 export const Footer: React.FC = () => {
+  const pathname = usePathname();
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
   const { addToast } = useUIStore();
+
+  if (pathname.startsWith("/admin") || pathname.startsWith("/pos")) {
+    return null;
+  }
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
