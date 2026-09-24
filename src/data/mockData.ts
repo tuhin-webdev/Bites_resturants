@@ -496,9 +496,9 @@ export const REVIEWS: CustomerReview[] = [
 ];
 
 export const AVAILABLE_COUPONS: Coupon[] = [
-  { code: "BITES20", discountPercent: 20, minSpend: 40, description: "20% OFF on orders over $40" },
-  { code: "WELCOME10", discountPercent: 10, minSpend: 25, description: "10% OFF Welcome Bonus" },
-  { code: "FEAST30", discountPercent: 30, minSpend: 80, description: "30% OFF Party Feasts over $80" },
+  { code: "BITES20", discountPercent: 20, minSpend: 500, description: "20% OFF on orders over ৳500" },
+  { code: "WELCOME10", discountPercent: 10, minSpend: 300, description: "10% OFF Welcome Bonus (Orders over ৳300)" },
+  { code: "FEAST30", discountPercent: 30, minSpend: 1000, description: "30% OFF Party Feasts over ৳1,000" },
 ];
 
 export const INITIAL_RESERVATIONS: TableReservation[] = [

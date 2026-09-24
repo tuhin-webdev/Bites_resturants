@@ -233,7 +233,7 @@ export const POSCatalog: React.FC = () => {
                   {/* Price and Orange (+) Add button from Mockup */}
                   <div className="flex items-center justify-between pt-1">
                     <span className="font-black text-base text-charcoal">
-                      ${dish.price.toFixed(2)}
+                      ৳{dish.price.toFixed(0)}
                     </span>
 
                     <button
@@ -295,7 +295,7 @@ export const POSCatalog: React.FC = () => {
 
                 <div className="text-center space-y-1">
                   <h4 className="font-bold text-sm text-charcoal">{dish.name}</h4>
-                  <p className="font-black text-sm text-[#FF6B00]">${dish.price.toFixed(2)}</p>
+                  <p className="font-black text-sm text-[#FF6B00]">৳{dish.price.toFixed(0)}</p>
                   <p className="text-[10px] text-gray-400 font-medium">
                     {dish.distance || "4.97 km"} • {dish.duration || "21 min"}
                   </p>

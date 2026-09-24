@@ -91,7 +91,7 @@ export const CartDrawer: React.FC = () => {
                 <Truck className="w-4 h-4 text-amber-600" />
                 {neededForFree === 0
                   ? "🎉 You qualified for FREE Delivery!"
-                  : `Add $${neededForFree.toFixed(2)} more for Free Delivery!`}
+                  : `Add ৳${neededForFree.toFixed(0)} more for Free Delivery!`}
               </span>
               <span className="text-amber-700 font-bold">{freePercent}%</span>
             </div>
@@ -188,7 +188,7 @@ export const CartDrawer: React.FC = () => {
                         </div>
 
                         <span className="text-xs font-black text-charcoal">
-                          ${itemTotal.toFixed(2)}
+                          ৳{itemTotal.toFixed(0)}
                         </span>
                       </div>
                     </div>
@@ -246,27 +246,27 @@ export const CartDrawer: React.FC = () => {
               <div className="space-y-1.5 text-xs text-charcoal-100">
                 <div className="flex justify-between">
                   <span>Subtotal</span>
-                  <span className="font-bold text-charcoal">${subtotal.toFixed(2)}</span>
+                  <span className="font-bold text-charcoal">৳{subtotal.toFixed(0)}</span>
                 </div>
                 {discount > 0 && (
                   <div className="flex justify-between text-emerald-700 font-medium">
                     <span>Discount ({coupon?.discountPercent}%)</span>
-                    <span>-${discount.toFixed(2)}</span>
+                    <span>-৳{discount.toFixed(0)}</span>
                   </div>
                 )}
                 <div className="flex justify-between">
                   <span>Estimated Delivery</span>
                   <span className="font-semibold text-charcoal">
-                    {delivery === 0 ? <strong className="text-emerald-600">FREE</strong> : `$${delivery.toFixed(2)}`}
+                    {delivery === 0 ? <strong className="text-emerald-600">FREE</strong> : `৳${delivery.toFixed(0)}`}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Estimated VAT / Tax (5%)</span>
-                  <span className="font-semibold text-charcoal">${tax.toFixed(2)}</span>
+                  <span>Estimated VAT (5%)</span>
+                  <span className="font-semibold text-charcoal">৳{tax.toFixed(0)}</span>
                 </div>
                 <div className="pt-2 border-t border-cream-200 flex justify-between text-sm font-black text-charcoal">
                   <span>Grand Total</span>
-                  <span className="text-lg text-amber-600">${total.toFixed(2)}</span>
+                  <span className="text-lg text-amber-600">৳{total.toFixed(0)}</span>
                 </div>
               </div>
 

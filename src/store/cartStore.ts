@@ -47,17 +47,17 @@ export const useCartStore = create<CartState>()(
           id: "prod-3-single",
           productId: "prod-3",
           name: "Authentic Chicken Shawarma",
-          price: 95.0,
+          price: 350.0,
           image: "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=80",
           quantity: 1,
           selectedSize: "Single Roll",
           selectedSauce: "Classic Lebanese Toum",
         },
       ],
-      coupon: { code: "BITES20", discountPercent: 20, minSpend: 40, description: "20% OFF on orders over $40" },
+      coupon: { code: "BITES20", discountPercent: 20, minSpend: 500, description: "20% OFF on orders over ৳500" },
       deliveryType: "standard",
-      deliveryFee: 5.0,
-      freeDeliveryThreshold: 75.0,
+      deliveryFee: 60.0,
+      freeDeliveryThreshold: 800.0,
 
       addItem: (newItem) => {
         set((state) => {
@@ -104,7 +104,7 @@ export const useCartStore = create<CartState>()(
         if (subtotal < found.minSpend) {
           return {
             success: false,
-            message: `Minimum order of $${found.minSpend.toFixed(2)} required for ${found.code}.`,
+            message: `Minimum order of ৳${found.minSpend} required for ${found.code}.`,
           };
         }
         set({ coupon: found });
@@ -133,7 +133,7 @@ export const useCartStore = create<CartState>()(
       getTax: () => {
         const subtotal = get().getSubtotal();
         const discount = get().getDiscount();
-        return (subtotal - discount) * 0.05; // 5% VAT / Tax
+        return (subtotal - discount) * 0.05; // 5% VAT
       },
 
       getEffectiveDeliveryFee: () => {
@@ -141,8 +141,8 @@ export const useCartStore = create<CartState>()(
         if (deliveryType === "pickup") return 0;
         const subtotal = get().getSubtotal();
         if (subtotal >= freeDeliveryThreshold && deliveryType === "standard") return 0;
-        if (deliveryType === "express") return 9.0;
-        return 5.0;
+        if (deliveryType === "express") return 120.0;
+        return 60.0;
       },
 
       getTotal: () => {

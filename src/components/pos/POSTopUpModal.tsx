@@ -9,13 +9,13 @@ export const POSTopUpModal: React.FC = () => {
     usePOSStore();
 
   const [mode, setMode] = useState<"topup" | "transfer">("topup");
-  const [amount, setAmount] = useState<string>("100");
+  const [amount, setAmount] = useState<string>("1000");
   const [recipient, setRecipient] = useState<string>("Main Cash Vault");
   const [successMsg, setSuccessMsg] = useState<string | null>(null);
 
   if (!isTopUpModalOpen) return null;
 
-  const quickAmounts = [50, 100, 250, 500, 1000];
+  const quickAmounts = [500, 1000, 2500, 5000, 10000];
 
   const handleAction = (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,14 +24,14 @@ export const POSTopUpModal: React.FC = () => {
 
     if (mode === "topup") {
       topUpBalance(val);
-      setSuccessMsg(`Successfully added $${val.toFixed(2)} to balance!`);
+      setSuccessMsg(`Successfully added ৳${val.toLocaleString()} to balance!`);
     } else {
       if (val > balance) {
         alert("Amount exceeds current balance!");
         return;
       }
       transferBalance(val);
-      setSuccessMsg(`Successfully transferred $${val.toFixed(2)} to ${recipient}!`);
+      setSuccessMsg(`Successfully transferred ৳${val.toLocaleString()} to ${recipient}!`);
     }
 
     setTimeout(() => {
@@ -53,7 +53,7 @@ export const POSTopUpModal: React.FC = () => {
               <h2 className="text-xl font-bold text-gray-900">Wallet Management</h2>
               <p className="text-xs text-gray-500">
                 Current Balance:{" "}
-                <span className="font-bold text-[#FF6B00]">${balance.toLocaleString()}</span>
+                <span className="font-bold text-[#FF6B00]">৳{balance.toLocaleString()}</span>
               </p>
             </div>
           </div>
@@ -107,13 +107,15 @@ export const POSTopUpModal: React.FC = () => {
           <form onSubmit={handleAction} className="p-6 space-y-4">
             <div>
               <label className="block text-xs font-semibold text-gray-700 mb-1.5">
-                {mode === "topup" ? "Amount to Add ($)" : "Amount to Transfer ($)"}
+                {mode === "topup" ? "Amount to Add (৳)" : "Amount to Transfer (৳)"}
               </label>
               <div className="relative">
-                <DollarSign className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <span className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2 font-bold text-sm">
+                  ৳
+                </span>
                 <input
                   type="number"
-                  step="1"
+                  step="50"
                   required
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
@@ -136,7 +138,7 @@ export const POSTopUpModal: React.FC = () => {
                         : "border-gray-200 hover:border-gray-300 text-gray-600"
                     }`}
                   >
-                    +${q}
+                    +৳{q.toLocaleString()}
                   </button>
                 ))}
               </div>
@@ -165,7 +167,7 @@ export const POSTopUpModal: React.FC = () => {
                 className="w-full py-3.5 px-4 rounded-2xl bg-[#FF6B00] hover:bg-[#E05E00] text-white font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-[#FF6B00]/25 transition-all"
               >
                 <ArrowUpRight className="w-4 h-4" />
-                {mode === "topup" ? `Add $${amount} to Balance` : `Transfer $${amount}`}
+                {mode === "topup" ? `Add ৳${amount} to Balance` : `Transfer ৳${amount}`}
               </button>
             </div>
           </form>

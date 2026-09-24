@@ -119,7 +119,7 @@ export default function CartPage() {
                     <Truck className="w-4 h-4 text-amber-600" />
                     {neededForFree === 0
                       ? "🎉 You qualified for FREE Delivery!"
-                      : `Add $${neededForFree.toFixed(2)} more for Free Express Delivery!`}
+                      : `Add ৳${neededForFree.toFixed(0)} more for Free Express Delivery!`}
                   </span>
                   <span className="text-amber-800 font-bold">{freePercent}%</span>
                 </div>
@@ -180,7 +180,7 @@ export default function CartPage() {
                           </div>
 
                           <div className="mt-2 text-xs font-semibold text-charcoal">
-                            ${itemUnitPrice.toFixed(2)} each
+                            ৳{itemUnitPrice.toFixed(0)} each
                           </div>
                         </div>
                       </div>
@@ -208,7 +208,7 @@ export default function CartPage() {
                         </div>
 
                         <span className="text-base font-black text-charcoal min-w-[70px] text-right">
-                          ${itemTotal.toFixed(2)}
+                          ৳{itemTotal.toFixed(0)}
                         </span>
 
                         <button
@@ -271,7 +271,7 @@ export default function CartPage() {
                     </div>
                     {couponError && <p className="text-xs text-red-500">{couponError}</p>}
                     <p className="text-[11px] text-charcoal-50">
-                      Use code <strong className="text-charcoal">BITES20</strong> for 20% off orders over $40!
+                      Use code <strong className="text-charcoal">BITES20</strong> for 20% off orders over ৳500!
                     </p>
                   </form>
                 )}
@@ -284,31 +284,31 @@ export default function CartPage() {
                 <div className="space-y-2 text-xs text-charcoal-100">
                   <div className="flex justify-between">
                     <span>Subtotal</span>
-                    <span className="font-bold text-charcoal">${subtotal.toFixed(2)}</span>
+                    <span className="font-bold text-charcoal">৳{subtotal.toFixed(0)}</span>
                   </div>
 
                   {discount > 0 && (
                     <div className="flex justify-between text-emerald-700 font-medium">
                       <span>Discount ({coupon?.code})</span>
-                      <span>-${discount.toFixed(2)}</span>
+                      <span>-৳{discount.toFixed(0)}</span>
                     </div>
                   )}
 
                   <div className="flex justify-between">
                     <span>Delivery Fee</span>
                     <span className="font-semibold text-charcoal">
-                      {delivery === 0 ? <strong className="text-emerald-600">FREE</strong> : `$${delivery.toFixed(2)}`}
+                      {delivery === 0 ? <strong className="text-emerald-600">FREE</strong> : `৳${delivery.toFixed(0)}`}
                     </span>
                   </div>
 
                   <div className="flex justify-between">
                     <span>Estimated Tax / VAT (5%)</span>
-                    <span className="font-semibold text-charcoal">${tax.toFixed(2)}</span>
+                    <span className="font-semibold text-charcoal">৳{tax.toFixed(0)}</span>
                   </div>
 
                   <div className="pt-3 border-t border-cream-200 flex justify-between text-base font-black text-charcoal">
                     <span>Total Amount</span>
-                    <span className="text-2xl text-amber-600">${total.toFixed(2)}</span>
+                    <span className="text-2xl text-amber-600">৳{total.toFixed(0)}</span>
                   </div>
                 </div>
 

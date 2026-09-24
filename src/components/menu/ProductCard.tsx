@@ -171,11 +171,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, highlightStyl
           <div className="flex flex-col">
             <div className="flex items-baseline gap-1.5">
               <span className="text-xl font-black text-charcoal">
-                ${product.price.toFixed(2)}
+                ৳{product.price.toFixed(0)}
               </span>
               {product.originalPrice && (
                 <span className="text-xs text-charcoal-50 line-through">
-                  ${product.originalPrice.toFixed(2)}
+                  ৳{product.originalPrice.toFixed(0)}
                 </span>
               )}
             </div>

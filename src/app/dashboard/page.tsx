@@ -227,7 +227,7 @@ function DashboardContent() {
                             {order.status}
                           </span>
                           <span className="font-black text-base text-charcoal">
-                            ${order.total.toFixed(2)}
+                            ৳{order.total.toFixed(0)}
                           </span>
                         </div>
                       </div>
@@ -241,7 +241,7 @@ function DashboardContent() {
                               {it.selectedSize ? `(${it.selectedSize})` : ""}
                             </span>
                             <span className="font-semibold text-charcoal">
-                              ${(it.price * it.quantity).toFixed(2)}
+                              ৳{(it.price * it.quantity).toFixed(0)}
                             </span>
                           </div>
                         ))}

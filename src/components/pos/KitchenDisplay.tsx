@@ -142,7 +142,7 @@ export const KitchenDisplay: React.FC = () => {
                             <span className="font-medium text-gray-800">{item.name}</span>
                           </div>
                           <span className="text-gray-400 font-mono text-[11px]">
-                            ${(item.price * item.quantity).toFixed(2)}
+                            ৳{(item.price * item.quantity).toFixed(0)}
                           </span>
                         </div>
                       ))}

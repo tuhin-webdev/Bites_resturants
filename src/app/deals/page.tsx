@@ -60,7 +60,7 @@ export default function DealsPage() {
                     <span className="bg-amber-100 text-amber-900 font-black text-xs px-2.5 py-1 rounded-full flex items-center gap-1">
                       <Percent className="w-3 h-3" /> {coupon.discountPercent}% OFF
                     </span>
-                    <span className="text-[11px] text-charcoal-50">Min ${coupon.minSpend}</span>
+                    <span className="text-[11px] text-charcoal-50">Min ৳{coupon.minSpend}</span>
                   </div>
 
                   <h3 className="font-mono text-2xl font-black text-charcoal tracking-wider">

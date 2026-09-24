@@ -312,14 +312,14 @@ export default function CheckoutPage() {
                     type: "standard",
                     title: "Standard Delivery",
                     time: "30-40 mins",
-                    price: subtotal >= 75 ? "FREE" : "$5.00",
+                    price: subtotal >= 800 ? "FREE" : "৳60",
                     desc: "Thermal bag bicycle courier",
                   },
                   {
                     type: "express",
                     title: "Priority Express",
                     time: "15-25 mins",
-                    price: "$9.00",
+                    price: "৳120",
                     desc: "Direct motorbike priority courier",
                   },
                   {
@@ -489,7 +489,7 @@ export default function CheckoutPage() {
                       <p className="text-[11px] text-charcoal-50">Qty: {item.quantity}</p>
                     </div>
                     <span className="font-bold text-charcoal">
-                      ${(item.price * item.quantity).toFixed(2)}
+                      ৳{(item.price * item.quantity).toFixed(0)}
                     </span>
                   </div>
                 ))}
@@ -499,31 +499,31 @@ export default function CheckoutPage() {
               <div className="space-y-2 pt-4 border-t border-cream-200 text-xs text-charcoal-100">
                 <div className="flex justify-between">
                   <span>Subtotal</span>
-                  <span className="font-bold text-charcoal">${subtotal.toFixed(2)}</span>
+                  <span className="font-bold text-charcoal">৳{subtotal.toFixed(0)}</span>
                 </div>
 
                 {discount > 0 && (
                   <div className="flex justify-between text-emerald-700 font-medium">
                     <span>Discount ({coupon?.code})</span>
-                    <span>-${discount.toFixed(2)}</span>
+                    <span>-৳{discount.toFixed(0)}</span>
                   </div>
                 )}
 
                 <div className="flex justify-between">
                   <span>Delivery Fee</span>
                   <span className="font-semibold text-charcoal">
-                    {delivery === 0 ? <strong className="text-emerald-600">FREE</strong> : `$${delivery.toFixed(2)}`}
+                    {delivery === 0 ? <strong className="text-emerald-600">FREE</strong> : `৳${delivery.toFixed(0)}`}
                   </span>
                 </div>
 
                 <div className="flex justify-between">
                   <span>VAT / Taxes (5%)</span>
-                  <span className="font-semibold text-charcoal">${tax.toFixed(2)}</span>
+                  <span className="font-semibold text-charcoal">৳{tax.toFixed(0)}</span>
                 </div>
 
                 <div className="pt-3 border-t border-cream-200 flex justify-between text-base font-black text-charcoal">
                   <span>Grand Total</span>
-                  <span className="text-2xl text-amber-600">${total.toFixed(2)}</span>
+                  <span className="text-2xl text-amber-600">৳{total.toFixed(0)}</span>
                 </div>
               </div>
 
@@ -537,7 +537,7 @@ export default function CheckoutPage() {
                   <span className="inline-block w-4 h-4 border-2 border-charcoal-dark border-t-transparent rounded-full animate-spin" />
                 ) : (
                   <>
-                    <Lock className="w-4 h-4" /> Place Order • ${total.toFixed(2)}
+                    <Lock className="w-4 h-4" /> Place Order • ৳{total.toFixed(0)}
                   </>
                 )}
               </button>

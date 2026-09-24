@@ -20,12 +20,19 @@ import {
 } from "lucide-react";
 
 export const POSNavbar: React.FC = () => {
-  const { searchQuery, setSearchQuery, activeView, setActiveView } = usePOSStore();
-  const [selectedLocation, setSelectedLocation] = useState("India");
+  const { searchQuery, setSearchQuery, activeView, setActiveView, logoutAdmin, adminUser } =
+    usePOSStore();
+  const [selectedLocation, setSelectedLocation] = useState("Dhaka, Bangladesh");
   const [isLocationMenuOpen, setIsLocationMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
 
-  const locations = ["India", "Downtown Main Hub", "Airport Boulevard", "Gulshan Express"];
+  const locations = [
+    "Dhaka, Bangladesh",
+    "Gulshan-2 Hub, Dhaka",
+    "Dhanmondi Branch, Dhaka",
+    "Uttara Sector 7, Dhaka",
+    "Chattogram Central Hub",
+  ];
 
   return (
     <header className="bg-[#FF6B00] text-white px-4 sm:px-6 py-3 sticky top-0 z-50 shadow-md">
@@ -36,9 +43,14 @@ export const POSNavbar: React.FC = () => {
             <div className="w-8 h-8 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
               <UtensilsCrossed className="w-5 h-5 text-white stroke-[2.5]" />
             </div>
-            <span className="font-black text-2xl tracking-tight text-white">
-              FoodDesk<span className="text-amber-200">.</span>
-            </span>
+            <div className="flex flex-col">
+              <span className="font-black text-2xl tracking-tight text-white leading-none">
+                Bites<span className="text-amber-200">.</span>
+              </span>
+              <span className="text-[9px] uppercase tracking-wider font-extrabold text-white/80">
+                Restaurant POS
+              </span>
+            </div>
           </Link>
 
           {/* Location Selector Pill from Mockup */}
@@ -182,10 +194,10 @@ export const POSNavbar: React.FC = () => {
                 </Link>
                 <div className="border-t border-gray-100 my-1" />
                 <button
-                  onClick={() => alert("Logged out from FoodDesk POS Terminal")}
+                  onClick={() => logoutAdmin()}
                   className="w-full flex items-center gap-2 px-4 py-2 hover:bg-red-50 text-red-600 font-semibold"
                 >
-                  <LogOut className="w-3.5 h-3.5" /> Sign Out
+                  <LogOut className="w-3.5 h-3.5" /> Sign Out of POS
                 </button>
               </div>
             )}

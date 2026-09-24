@@ -152,7 +152,7 @@ export const SearchModal: React.FC = () => {
                       <span>•</span>
                       <span className="text-amber-600 font-semibold">★ {dish.rating}</span>
                       <span>•</span>
-                      <span className="font-bold text-charcoal">${dish.price.toFixed(2)}</span>
+                      <span className="font-bold text-charcoal">৳{dish.price.toFixed(0)}</span>
                     </div>
                   </div>
                 </Link>

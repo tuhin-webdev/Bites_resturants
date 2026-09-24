@@ -185,7 +185,7 @@ export const QuickViewModal: React.FC = () => {
                         <span>{opt.name}</span>
                         {opt.extraPrice !== 0 && (
                           <span className="text-amber-700 font-bold">
-                            {opt.extraPrice > 0 ? `+$${opt.extraPrice.toFixed(2)}` : `-$${Math.abs(opt.extraPrice).toFixed(2)}`}
+                            {opt.extraPrice > 0 ? `+৳${opt.extraPrice.toFixed(0)}` : `-৳${Math.abs(opt.extraPrice).toFixed(0)}`}
                           </span>
                         )}
                       </button>
@@ -249,7 +249,7 @@ export const QuickViewModal: React.FC = () => {
                             <span>{addon.name}</span>
                           </div>
                           <span className="text-xs font-bold text-amber-700">
-                            +${addon.price.toFixed(2)}
+                            +৳{addon.price.toFixed(0)}
                           </span>
                         </div>
                       );
@@ -298,7 +298,7 @@ export const QuickViewModal: React.FC = () => {
                 <div>
                   <span className="text-[11px] text-charcoal-50 block">Total Price:</span>
                   <span className="text-xl font-black text-charcoal">
-                    ${totalPrice.toFixed(2)}
+                    ৳{totalPrice.toFixed(0)}
                   </span>
                 </div>
               </div>

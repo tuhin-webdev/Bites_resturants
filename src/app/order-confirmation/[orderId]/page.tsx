@@ -259,7 +259,7 @@ export default function OrderConfirmationPage({ params }: OrderConfirmationPageP
                     </span>
                   </div>
                 </div>
-                <span className="font-bold text-charcoal">${(item.price * item.quantity).toFixed(2)}</span>
+                <span className="font-bold text-charcoal">৳{(item.price * item.quantity).toFixed(0)}</span>
               </div>
             ))}
           </div>
@@ -268,25 +268,25 @@ export default function OrderConfirmationPage({ params }: OrderConfirmationPageP
           <div className="pt-4 border-t border-cream-200 space-y-1.5 text-xs text-charcoal-100 max-w-xs ml-auto">
             <div className="flex justify-between">
               <span>Subtotal:</span>
-              <span className="font-bold text-charcoal">${order.subtotal.toFixed(2)}</span>
+              <span className="font-bold text-charcoal">৳{order.subtotal.toFixed(0)}</span>
             </div>
             {order.discount > 0 && (
               <div className="flex justify-between text-emerald-700">
                 <span>Discount:</span>
-                <span>-${order.discount.toFixed(2)}</span>
+                <span>-৳{order.discount.toFixed(0)}</span>
               </div>
             )}
             <div className="flex justify-between">
               <span>Delivery Charge:</span>
-              <span>{order.deliveryFee === 0 ? "FREE" : `$${order.deliveryFee.toFixed(2)}`}</span>
+              <span>{order.deliveryFee === 0 ? "FREE" : `৳${order.deliveryFee.toFixed(0)}`}</span>
             </div>
             <div className="flex justify-between">
               <span>Tax / VAT (5%):</span>
-              <span>${order.tax.toFixed(2)}</span>
+              <span>৳{order.tax.toFixed(0)}</span>
             </div>
             <div className="pt-2 border-t border-cream-200 flex justify-between text-base font-black text-charcoal">
               <span>Total Paid:</span>
-              <span className="text-amber-600">${order.total.toFixed(2)}</span>
+              <span className="text-amber-600">৳{order.total.toFixed(0)}</span>
             </div>
           </div>
         </div>

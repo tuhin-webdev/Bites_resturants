@@ -21,7 +21,7 @@ function MenuContent() {
   // Filter States
   const [selectedCategory, setSelectedCategory] = useState<string>(initialCategory);
   const [searchQuery, setSearchQuery] = useState("");
-  const [maxPrice, setMaxPrice] = useState<number>(100);
+  const [maxPrice, setMaxPrice] = useState<number>(1500);
   const [selectedDietary, setSelectedDietary] = useState<string[]>([]);
   const [spicyLevel, setSpicyLevel] = useState<number | "all">("all");
   const [minRating, setMinRating] = useState<number>(0);
@@ -39,7 +39,7 @@ function MenuContent() {
   const handleResetFilters = () => {
     setSelectedCategory("All");
     setSearchQuery("");
-    setMaxPrice(100);
+    setMaxPrice(1500);
     setSelectedDietary([]);
     setSpicyLevel("all");
     setMinRating(0);
@@ -188,20 +188,20 @@ function MenuContent() {
                 <label className="text-xs font-bold text-charcoal uppercase tracking-wider">
                   Max Price:
                 </label>
-                <span className="text-xs font-bold text-amber-600">${maxPrice.toFixed(2)}</span>
+                <span className="text-xs font-bold text-amber-600">৳{maxPrice.toFixed(0)}</span>
               </div>
               <input
                 type="range"
-                min="15"
-                max="100"
-                step="5"
+                min="100"
+                max="1500"
+                step="50"
                 value={maxPrice}
                 onChange={(e) => setMaxPrice(Number(e.target.value))}
                 className="w-full accent-amber-500 cursor-pointer"
               />
               <div className="flex justify-between text-[10px] text-charcoal-50 mt-1">
-                <span>$15</span>
-                <span>$100</span>
+                <span>৳100</span>
+                <span>৳1500</span>
               </div>
             </div>
 

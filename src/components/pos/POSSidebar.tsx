@@ -119,18 +119,18 @@ export const POSSidebar: React.FC = () => {
           </h5>
 
           <button
-            onClick={() => alert("Upgraded to FoodDesk Enterprise Tier! 🚀")}
+            onClick={() => alert("Upgraded to Bites Restaurant POS Enterprise Tier! 🚀")}
             className="mt-3 px-4 py-1.5 bg-white text-[#FF6B00] hover:bg-amber-50 font-bold text-[11px] rounded-full shadow-xs transition-colors"
           >
             Upgrade
           </button>
         </div>
 
-        {/* Footer info from Mockup */}
+        {/* Footer info matching Bites branding */}
         <div className="text-[10px] text-gray-400 px-1 leading-tight">
-          <p className="font-semibold text-gray-600">Food Desk - Online Food Delivery</p>
-          <p>Admin Dashboard</p>
-          <p className="mt-0.5 text-gray-400">© 2026 All Rights Reserved</p>
+          <p className="font-semibold text-gray-600">Bites Restaurant - Food & Dining</p>
+          <p>POS & Admin Dashboard</p>
+          <p className="mt-0.5 text-gray-400">© 2026 Bites. All Rights Reserved</p>
         </div>
       </div>
     </aside>

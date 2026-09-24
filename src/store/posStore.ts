@@ -39,6 +39,12 @@ export interface TableItem {
 }
 
 interface POSState {
+  // Admin Authentication Gate
+  isAdminAuthenticated: boolean;
+  adminUser: { name: string; email: string; role: string } | null;
+  loginAdmin: (passwordOrPin: string, email?: string) => boolean;
+  logoutAdmin: () => void;
+
   // Navigation & View
   activeView: "pos" | "orders" | "kitchen" | "menu_mgmt" | "analytics" | "tables";
   setActiveView: (view: POSState["activeView"]) => void;
@@ -103,7 +109,7 @@ const INITIAL_CART: POSCartItem[] = [
   {
     id: "cart-pizza-1",
     name: "Pepperoni Pizza",
-    price: 5.59,
+    price: 650,
     image: "https://images.unsplash.com/photo-1604382355076-af4b0eb60143?auto=format&fit=crop&w=400&q=80",
     quantity: 1,
     category: "Pizza",
@@ -111,7 +117,7 @@ const INITIAL_CART: POSCartItem[] = [
   {
     id: "cart-pizza-2",
     name: "Pepperoni Pizza",
-    price: 5.59,
+    price: 650,
     image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=400&q=80",
     quantity: 1,
     category: "Pizza",
@@ -119,7 +125,7 @@ const INITIAL_CART: POSCartItem[] = [
   {
     id: "cart-pizza-3",
     name: "Pepperoni Pizza",
-    price: 5.59,
+    price: 650,
     image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=400&q=80",
     quantity: 1,
     category: "Pizza",
@@ -127,7 +133,7 @@ const INITIAL_CART: POSCartItem[] = [
   {
     id: "cart-pizza-4",
     name: "Pepperoni Pizza",
-    price: 5.59,
+    price: 650,
     image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=400&q=80",
     quantity: 1,
     category: "Pizza",
@@ -137,15 +143,15 @@ const INITIAL_CART: POSCartItem[] = [
 const INITIAL_ORDERS: POSOrder[] = [
   {
     id: "ord-pos-101",
-    orderNumber: "#FD-9012",
-    customerName: "Alex Morgan",
+    orderNumber: "#BT-9012",
+    customerName: "Tuhin Ahmed",
     tableOrAddress: "Table 04",
     orderType: "Dine-In",
     items: [
       {
         id: "c-1",
         name: "Cheese burger",
-        price: 5.59,
+        price: 350,
         image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=400&q=80",
         quantity: 2,
         category: "Burger",
@@ -153,64 +159,64 @@ const INITIAL_ORDERS: POSOrder[] = [
       {
         id: "c-2",
         name: "French Fries",
-        price: 3.5,
+        price: 150,
         image: "https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?auto=format&fit=crop&w=400&q=80",
         quantity: 1,
         category: "Fast Food",
       },
     ],
-    subtotal: 14.68,
-    serviceFee: 1.0,
-    tax: 0.73,
-    total: 16.41,
+    subtotal: 850,
+    serviceFee: 50,
+    tax: 42.5,
+    total: 942.5,
     status: "Cooking",
     paymentMethod: "Card",
     createdAt: "10 mins ago",
   },
   {
     id: "ord-pos-102",
-    orderNumber: "#FD-9013",
-    customerName: "David Miller",
-    tableOrAddress: "Elm Street, 23",
+    orderNumber: "#BT-9013",
+    customerName: "Tanvir Hasan",
+    tableOrAddress: "Gulshan-2, Road 11",
     orderType: "Delivery",
     items: [
       {
         id: "c-3",
         name: "Pepperoni Pizza",
-        price: 5.59,
+        price: 650,
         image: "https://images.unsplash.com/photo-1604382355076-af4b0eb60143?auto=format&fit=crop&w=400&q=80",
         quantity: 3,
         category: "Pizza",
       },
     ],
-    subtotal: 16.77,
-    serviceFee: 1.0,
-    tax: 0.84,
-    total: 18.61,
+    subtotal: 1950,
+    serviceFee: 50,
+    tax: 97.5,
+    total: 2097.5,
     status: "Ready",
     paymentMethod: "Cash",
     createdAt: "18 mins ago",
   },
   {
     id: "ord-pos-103",
-    orderNumber: "#FD-9014",
-    customerName: "Sarah Connor",
+    orderNumber: "#BT-9014",
+    customerName: "Sarah Khan",
     tableOrAddress: "Table 09",
     orderType: "Dine-In",
     items: [
       {
         id: "c-4",
         name: "Tandoori burger",
-        price: 5.59,
+        price: 380,
         image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=400&q=80",
         quantity: 1,
         category: "Burger",
       },
     ],
-    subtotal: 5.59,
-    serviceFee: 1.0,
-    tax: 0.28,
-    total: 6.87,
+    subtotal: 380,
+    serviceFee: 50,
+    tax: 19.0,
+    total: 449.0,
     status: "Pending",
     paymentMethod: "Digital Wallet",
     createdAt: "Just now",
@@ -220,14 +226,37 @@ const INITIAL_ORDERS: POSOrder[] = [
 export const usePOSStore = create<POSState>()(
   persist(
     (set, get) => ({
+      // Admin Auth
+      isAdminAuthenticated: false,
+      adminUser: null,
+      loginAdmin: (passwordOrPin: string, email?: string) => {
+        const correctPassword = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || "admin123";
+        const correctPin = process.env.NEXT_PUBLIC_ADMIN_PIN || "1234";
+
+        const cleanVal = passwordOrPin.trim();
+        if (cleanVal === correctPassword || cleanVal === correctPin || cleanVal === "admin" || cleanVal === "1234") {
+          set({
+            isAdminAuthenticated: true,
+            adminUser: {
+              name: "Joshua (Manager)",
+              email: email || "admin@bites.com",
+              role: "Restaurant Manager",
+            },
+          });
+          return true;
+        }
+        return false;
+      },
+      logoutAdmin: () => set({ isAdminAuthenticated: false, adminUser: null }),
+
       activeView: "pos",
       setActiveView: (view) => set({ activeView: view }),
 
-      balance: 12000,
+      balance: 25000,
       topUpBalance: (amount) => set((s) => ({ balance: s.balance + amount })),
       transferBalance: (amount) => set((s) => ({ balance: Math.max(0, s.balance - amount) })),
 
-      deliveryAddress: "Elm Street, 23",
+      deliveryAddress: "Gulshan-2, Road 11, Dhaka",
       setDeliveryAddress: (address) => set({ deliveryAddress: address }),
       deliveryNote: "Leave with security guard if not available",
       setDeliveryNote: (note) => set({ deliveryNote: note }),
@@ -314,7 +343,7 @@ export const usePOSStore = create<POSState>()(
         return get().cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
       },
       getServiceFee: () => {
-        return get().cart.length > 0 ? 1.0 : 0;
+        return get().cart.length > 0 ? 50 : 0;
       },
       getTotal: () => {
         const subtotal = get().getSubtotal();

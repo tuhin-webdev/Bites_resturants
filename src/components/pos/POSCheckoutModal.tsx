@@ -37,8 +37,8 @@ export const POSCheckoutModal: React.FC = () => {
   } = usePOSStore();
 
   const [paymentMethod, setPaymentMethod] = useState<"Cash" | "Card" | "Digital Wallet">("Cash");
-  const [cashTendered, setCashTendered] = useState<string>("25.00");
-  const [customerName, setCustomerName] = useState<string>("Alex Morgan");
+  const [cashTendered, setCashTendered] = useState<string>("1000");
+  const [customerName, setCustomerName] = useState<string>("Tuhin Ahmed");
   const [tableNumber, setTableNumber] = useState<string>("Table 04");
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
   const [createdOrder, setCreatedOrder] = useState<POSOrder | null>(null);
@@ -47,8 +47,8 @@ export const POSCheckoutModal: React.FC = () => {
 
   const subtotal = getSubtotal();
   const serviceFee = getServiceFee();
-  const tax = Number((subtotal * 0.05).toFixed(2));
-  const grandTotal = Number((subtotal + serviceFee + tax).toFixed(2));
+  const tax = Number((subtotal * 0.05).toFixed(0));
+  const grandTotal = Number((subtotal + serviceFee + tax).toFixed(0));
 
   const tenderedNum = parseFloat(cashTendered) || 0;
   const changeDue = Math.max(0, tenderedNum - grandTotal);
@@ -64,7 +64,7 @@ export const POSCheckoutModal: React.FC = () => {
       transferBalance(grandTotal);
     }
 
-    const orderNum = `#FD-${Math.floor(1000 + Math.random() * 9000)}`;
+    const orderNum = `#BT-${Math.floor(1000 + Math.random() * 9000)}`;
     const newOrder: POSOrder = {
       id: `ord-${Date.now()}`,
       orderNumber: orderNum,
@@ -140,8 +140,8 @@ export const POSCheckoutModal: React.FC = () => {
             {/* Printable Thermal Receipt Card */}
             <div id="thermal-receipt" className="w-full max-w-sm bg-gray-50 border border-dashed border-gray-300 rounded-2xl p-6 text-left font-mono text-xs text-gray-700 shadow-inner mb-6">
               <div className="text-center pb-4 border-b border-dashed border-gray-300">
-                <h4 className="text-base font-black text-gray-900">FOODDESK RESTAURANT</h4>
-                <p className="text-gray-500 text-[11px]">Downtown Hub • POS Terminal #1</p>
+                <h4 className="text-base font-black text-gray-900">BITES RESTAURANT</h4>
+                <p className="text-gray-500 text-[11px]">Gulshan-2 Hub, Dhaka • POS Terminal #1</p>
                 <p className="text-gray-400 text-[10px] mt-1">{new Date().toLocaleString()}</p>
               </div>
 
@@ -169,7 +169,7 @@ export const POSCheckoutModal: React.FC = () => {
                 {createdOrder.items.map((it, idx) => (
                   <div key={idx} className="flex justify-between items-center">
                     <span className="line-clamp-1">{it.quantity}x {it.name}</span>
-                    <span className="font-semibold">${(it.price * it.quantity).toFixed(2)}</span>
+                    <span className="font-semibold">৳{(it.price * it.quantity).toFixed(0)}</span>
                   </div>
                 ))}
               </div>
@@ -178,29 +178,29 @@ export const POSCheckoutModal: React.FC = () => {
               <div className="pt-3 space-y-1 text-right">
                 <div className="flex justify-between text-gray-500">
                   <span>Subtotal:</span>
-                  <span>${createdOrder.subtotal.toFixed(2)}</span>
+                  <span>৳{createdOrder.subtotal.toFixed(0)}</span>
                 </div>
                 <div className="flex justify-between text-gray-500">
                   <span>Service Fee:</span>
-                  <span>${createdOrder.serviceFee.toFixed(2)}</span>
+                  <span>৳{createdOrder.serviceFee.toFixed(0)}</span>
                 </div>
                 <div className="flex justify-between text-gray-500">
                   <span>Tax (5%):</span>
-                  <span>${createdOrder.tax.toFixed(2)}</span>
+                  <span>৳{createdOrder.tax.toFixed(0)}</span>
                 </div>
                 <div className="flex justify-between text-sm font-bold text-gray-900 pt-2 border-t border-dashed border-gray-300">
                   <span>TOTAL PAID:</span>
-                  <span className="text-[#FF6B00]">${createdOrder.total.toFixed(2)}</span>
+                  <span className="text-[#FF6B00]">৳{createdOrder.total.toFixed(0)}</span>
                 </div>
                 {paymentMethod === "Cash" && (
                   <>
                     <div className="flex justify-between text-gray-500 pt-1">
                       <span>Cash Tendered:</span>
-                      <span>${tenderedNum.toFixed(2)}</span>
+                      <span>৳{tenderedNum.toFixed(0)}</span>
                     </div>
                     <div className="flex justify-between text-emerald-600 font-bold">
                       <span>Change Given:</span>
-                      <span>${changeDue.toFixed(2)}</span>
+                      <span>৳{changeDue.toFixed(0)}</span>
                     </div>
                   </>
                 )}
@@ -324,7 +324,7 @@ export const POSCheckoutModal: React.FC = () => {
                         <span className="text-gray-400">×{item.quantity}</span>
                       </div>
                       <span className="font-bold text-gray-800">
-                        ${(item.price * item.quantity).toFixed(2)}
+                        ৳{(item.price * item.quantity).toFixed(0)}
                       </span>
                     </div>
                   ))
@@ -374,7 +374,7 @@ export const POSCheckoutModal: React.FC = () => {
                   }`}
                 >
                   <Wallet className="w-5 h-5" />
-                  <span className="text-xs">Wallet (${balance.toLocaleString()})</span>
+                  <span className="text-xs">Wallet (৳{balance.toLocaleString()})</span>
                 </button>
               </div>
             </div>
@@ -384,11 +384,11 @@ export const POSCheckoutModal: React.FC = () => {
               <div className="bg-amber-50/70 border border-amber-200 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div className="w-full sm:w-auto">
                   <span className="text-xs font-semibold text-gray-700 block mb-1">
-                    Amount Tendered ($)
+                    Amount Tendered (৳)
                   </span>
                   <input
                     type="number"
-                    step="0.5"
+                    step="10"
                     value={cashTendered}
                     onChange={(e) => setCashTendered(e.target.value)}
                     className="w-36 px-3 py-2 bg-white border border-gray-300 rounded-xl text-sm font-bold text-gray-900 focus:outline-none focus:border-[#FF6B00]"
@@ -401,7 +401,7 @@ export const POSCheckoutModal: React.FC = () => {
                       changeDue >= 0 ? "text-emerald-600" : "text-red-500"
                     }`}
                   >
-                    ${changeDue.toFixed(2)}
+                    ৳{changeDue.toFixed(0)}
                   </span>
                 </div>
               </div>
@@ -411,20 +411,20 @@ export const POSCheckoutModal: React.FC = () => {
             <div className="border-t border-gray-100 pt-4 space-y-1.5">
               <div className="flex justify-between text-xs text-gray-500">
                 <span>Subtotal</span>
-                <span>${subtotal.toFixed(2)}</span>
+                <span>৳{subtotal.toFixed(0)}</span>
               </div>
               <div className="flex justify-between text-xs text-gray-500">
                 <span>Service Fee</span>
-                <span>${serviceFee.toFixed(2)}</span>
+                <span>৳{serviceFee.toFixed(0)}</span>
               </div>
               <div className="flex justify-between text-xs text-gray-500">
-                <span>Sales Tax (5%)</span>
-                <span>${tax.toFixed(2)}</span>
+                <span>Sales VAT (5%)</span>
+                <span>৳{tax.toFixed(0)}</span>
               </div>
               <div className="flex justify-between text-base font-bold text-gray-900 pt-2 border-t border-gray-100">
                 <span>Total Amount</span>
                 <span className="text-2xl font-black text-[#FF6B00]">
-                  ${grandTotal.toFixed(2)}
+                  ৳{grandTotal.toFixed(0)}
                 </span>
               </div>
             </div>
@@ -436,7 +436,7 @@ export const POSCheckoutModal: React.FC = () => {
               className="w-full py-3.5 px-6 rounded-2xl bg-[#FF6B00] hover:bg-[#E05E00] text-white font-bold text-base transition-all shadow-lg shadow-[#FF6B00]/25 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
               <Sparkles className="w-5 h-5" />
-              Pay & Print Order (${grandTotal.toFixed(2)})
+              Pay & Print Order (৳{grandTotal.toFixed(0)})
             </button>
           </div>
         )}

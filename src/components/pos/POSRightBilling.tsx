@@ -57,7 +57,7 @@ export const POSRightBilling: React.FC = () => {
             <div>
               <span className="text-[11px] text-white/80 font-medium block">Balance</span>
               <span className="text-2xl font-black tracking-tight text-white">
-                ${balance.toLocaleString(undefined, { minimumFractionDigits: 3, maximumFractionDigits: 3 })}
+                ৳{balance.toLocaleString()}
               </span>
             </div>
 
@@ -165,7 +165,7 @@ export const POSRightBilling: React.FC = () => {
 
                   <div className="flex items-center gap-2 shrink-0">
                     <span className="font-bold text-charcoal text-xs">
-                      +${(item.price * item.quantity).toFixed(2)}
+                      +৳{(item.price * item.quantity).toFixed(0)}
                     </span>
 
                     {/* Stepper buttons [-] 1 [+] from mockup */}
@@ -203,14 +203,14 @@ export const POSRightBilling: React.FC = () => {
         {/* Pricing Summary */}
         <div className="pt-3 border-t border-gray-100 space-y-2 text-xs">
           <div className="flex justify-between text-gray-500 font-medium">
-            <span>Service</span>
-            <span className="font-bold text-charcoal">+${service.toFixed(2)}</span>
+            <span>Service Fee</span>
+            <span className="font-bold text-charcoal">+৳{service.toFixed(0)}</span>
           </div>
 
           <div className="flex justify-between items-baseline pt-1">
             <span className="font-bold text-charcoal text-sm">Total</span>
             <span className="text-xl font-black text-[#FF6B00]">
-              ${total > 0 ? total.toFixed(2) : "202.00"}
+              ৳{total > 0 ? total.toFixed(0) : "0"}
             </span>
           </div>
 

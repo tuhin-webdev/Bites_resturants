@@ -129,10 +129,10 @@ export const MenuManagement: React.FC = () => {
                     {/* Price */}
                     <td className="py-3 px-4">
                       <div className="flex items-baseline gap-1.5">
-                        <span className="font-bold text-gray-900">${dish.price.toFixed(2)}</span>
+                        <span className="font-bold text-gray-900">৳{dish.price.toFixed(0)}</span>
                         {dish.originalPrice && (
                           <span className="text-xs text-gray-400 line-through">
-                            ${dish.originalPrice.toFixed(2)}
+                            ৳{dish.originalPrice.toFixed(0)}
                           </span>
                         )}
                       </div>

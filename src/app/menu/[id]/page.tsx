@@ -321,11 +321,11 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
 
               <div className="flex items-baseline gap-3 mt-4">
                 <span className="text-3xl font-black text-charcoal">
-                  ${unitPrice.toFixed(2)}
+                  ৳{unitPrice.toFixed(0)}
                 </span>
                 {product.originalPrice && (
                   <span className="text-sm text-charcoal-50 line-through">
-                    ${(product.originalPrice + sizeExtraPrice).toFixed(2)}
+                    ৳{(product.originalPrice + sizeExtraPrice).toFixed(0)}
                   </span>
                 )}
               </div>
@@ -356,7 +356,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
                       <span>{opt.name}</span>
                       {opt.extraPrice !== 0 && (
                         <span className="text-amber-700 font-bold">
-                          {opt.extraPrice > 0 ? `+$${opt.extraPrice.toFixed(2)}` : `-$${Math.abs(opt.extraPrice).toFixed(2)}`}
+                          {opt.extraPrice > 0 ? `+৳${opt.extraPrice.toFixed(0)}` : `-৳${Math.abs(opt.extraPrice).toFixed(0)}`}
                         </span>
                       )}
                     </button>
@@ -420,7 +420,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
                           <span>{addon.name}</span>
                         </div>
                         <span className="text-xs font-bold text-amber-700">
-                          +${addon.price.toFixed(2)}
+                          +৳{addon.price.toFixed(0)}
                         </span>
                       </div>
                     );
@@ -473,7 +473,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
                   className="w-full sm:flex-1 py-4 bg-amber-500 hover:bg-amber-600 text-charcoal-dark font-black text-sm rounded-full shadow-hover hover:shadow-lg transition-all duration-200 active:scale-95 flex items-center justify-center gap-2"
                 >
                   <ShoppingBag className="w-4 h-4" />
-                  Add to Cart • ${totalPrice.toFixed(2)}
+                  Add to Cart • ৳{totalPrice.toFixed(0)}
                 </button>
 
                 {/* Instant Buy Now */}
@@ -517,7 +517,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
                 </div>
                 <div>
                   <h4 className="text-xs font-bold text-charcoal">{product.name}</h4>
-                  <span className="text-xs text-amber-700 font-bold">${product.price.toFixed(2)}</span>
+                  <span className="text-xs text-amber-700 font-bold">৳{product.price.toFixed(0)}</span>
                 </div>
               </div>
 
@@ -530,7 +530,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
                 </div>
                 <div>
                   <h4 className="text-xs font-bold text-charcoal">{companionDish.name}</h4>
-                  <span className="text-xs text-amber-700 font-bold">${companionDish.price.toFixed(2)}</span>
+                  <span className="text-xs text-amber-700 font-bold">৳{companionDish.price.toFixed(0)}</span>
                 </div>
               </div>
             </div>
@@ -540,7 +540,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
               <div>
                 <span className="text-[11px] text-charcoal-50 block">Bundle Price:</span>
                 <span className="text-xl font-black text-charcoal">
-                  ${(product.price + companionDish.price).toFixed(2)}
+                  ৳{(product.price + companionDish.price).toFixed(0)}
                 </span>
               </div>
               <button
